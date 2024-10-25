@@ -41,5 +41,5 @@ jobs:
       - name: Enter dir and deploy
         uses: serverless/github-action@v3.2
         with:
-          args: -c "cd ./laravel && serverless deploy"
+          args: -c "cd ./example-app && serverless deploy"
           entrypoint: /bin/sh
