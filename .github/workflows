@@ -1,0 +1,37 @@
+
+name: "Deploy sample app"
+
+on:
+  push:
+    branches:
+      - "master"
+
+
+env:
+  AWS_ROLE: arn:aws:iam::529088285198:role/github_action_role
+  AWS_REGION: us-east-1
+  APP_NAME: sample-app
+  ENVIRONMENT: development
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # Permissions are needed to interact with GitHub's OIDC Token endpoint.
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout code from master branch
+        uses: actions/checkout@v2
+
+      # Configure AWS Credential
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ env.AWS_ROLE }}
+          aws-region: ${{ env.AWS_REGION }}
+      
+      - name: test cli
+        run: aws iam list-users
