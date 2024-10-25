@@ -38,7 +38,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - name: serverless deploy
+      - name: Enter dir and deploy
         uses: serverless/github-action@v3.2
         with:
-          args: deploy
+          args: -c "cd ./laravel && serverless deploy"
+          entrypoint: /bin/sh
