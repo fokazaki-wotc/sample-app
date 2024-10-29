@@ -39,9 +39,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: generate serverless requirements
-        run: cd example-app && php artisan vendor:publish --tag=serverless-config
-          
       - name: Enter dir and deploy
         uses: serverless/github-action@v3.2
         with:
