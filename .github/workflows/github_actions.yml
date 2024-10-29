@@ -33,11 +33,14 @@ jobs:
           role-to-assume: ${{ env.AWS_ROLE }}
           aws-region: ${{ env.AWS_REGION }}
       
-
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+
+
+      - name: Update dependencies
+        run: "cd example-app;composer require bref/bref bref/laravel-bridge --update-with-dependencies"
 
       - name: Enter dir and deploy
         uses: serverless/github-action@v3.2
