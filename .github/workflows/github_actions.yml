@@ -40,7 +40,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: check dir and files
-        run: pwd; ls -al
+        run: pwd; ls -al; php -version
           
       - name: Enter dir and deploy
         uses: serverless/github-action@v3.2
